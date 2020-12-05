@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">news_app</string>
+
+    <string name="title_home">Trang chủ</string>
+    <string name="title_category">Chủ đề</string>
+    <string name="title_profile">Thông tin cá nhân</string>
+</resources>
