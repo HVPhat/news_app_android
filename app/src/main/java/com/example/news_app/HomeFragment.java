@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
-    LinkedList<String> wordList;
+    LinkedList<BaiViet> wordList;
     int img = R.drawable.no_image;
     RecyclerView recyclerViewWordList;
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
@@ -25,9 +25,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         //Tạo nguồn dữ liệu
-        this.wordList = new LinkedList<String>();
+        this.wordList = new LinkedList<BaiViet>();
         for(int i=0; i<=50; i++)
-            this.wordList.add("Bài viết "+i);
+            this.wordList.add(new BaiViet("Bài viết số "+i,"Nội dung bài viết số "+i));
 
         //Thiết lập Adapter và LayoutManager cho RecyclerView
         recyclerViewWordList = (RecyclerView) rootView.findViewById(R.id.homeRecyclerView);

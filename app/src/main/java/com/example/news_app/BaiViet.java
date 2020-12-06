@@ -4,26 +4,26 @@ import android.widget.TextView;
 
 public class BaiViet {
     private String TenBaiViet;
-    private int HinhAnh;
+    private String NoiDung;
 
-    public BaiViet(String tenBaiViet, int hinhAnh) {
+    public BaiViet(String tenBaiViet, String noiDung) {
         TenBaiViet = tenBaiViet;
-        HinhAnh = hinhAnh;
-    }
-
-    public String getTenBaiViet() {
-        return TenBaiViet;
+        NoiDung = noiDung;
     }
 
     public void setTenBaiViet(String tenBaiViet) {
         TenBaiViet = tenBaiViet;
     }
 
-    public int getHinhAnh() {
-        return HinhAnh;
+    public void setNoiDung(String noiDung) {
+        NoiDung = noiDung;
     }
 
-    public void setHinhAnh(int hinhAnh) {
-        HinhAnh = hinhAnh;
+    public String getTenBaiViet() {
+        return TenBaiViet;
+    }
+
+    public String getNoiDung() {
+        return NoiDung;
     }
 }

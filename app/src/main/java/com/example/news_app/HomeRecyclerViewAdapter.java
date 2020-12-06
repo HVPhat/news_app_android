@@ -17,11 +17,11 @@ import java.util.LinkedList;
 
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder> {
-    final LinkedList<String> mDataSet;
+    final LinkedList<BaiViet> mDataSet;
     LayoutInflater mInfater;
     int img;
 
-    HomeRecyclerViewAdapter(LinkedList<String> mDataSet, int img){
+    HomeRecyclerViewAdapter(LinkedList<BaiViet> mDataSet, int img){
         this.mDataSet=mDataSet;
         this.img=img;
     }
@@ -35,9 +35,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull HomeRecyclerViewAdapter.ViewHolder holder, int position) {
         //Lấy giá trị tại position trong Dataset
-        String curStr = this.mDataSet.get(position);
+        BaiViet curBaiViet = this.mDataSet.get(position);
         //Gán giá trị vào view trong ViewHolder
-        holder.txtWord.setText(curStr);
+        holder.txtWord.setText(curBaiViet.getTenBaiViet());
         holder.mImg.setImageResource(img);
     }
 
@@ -61,9 +61,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 public void onClick(View v) {
                     //Lấy vị trí của item được click
                     int position = getLayoutPosition();
+                    //Khai báo biến với kiểu dữ liệu BaiViet để chứa dữ liệu lấy ra từ linkedlist
+                    BaiViet mBaiViet = mDataSet.get(position);
                     Intent intent = new Intent(mContext, BaiVietActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("NoiDung", "Nội dung bài viết số " + position);
+                    bundle.putString("NoiDung", mBaiViet.getNoiDung());
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
                     Log.d("CLICK_ITEM", "Clicked item "+ position);
