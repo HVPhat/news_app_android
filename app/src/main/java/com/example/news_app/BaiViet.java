@@ -5,10 +5,13 @@ import android.widget.TextView;
 public class BaiViet {
     private String TenBaiViet;
     private String NoiDung;
-
-    public BaiViet(String tenBaiViet, String noiDung) {
+    private String HinhAnh;
+    private String Id;
+    public BaiViet(String tenBaiViet, String noiDung, String hinhAnh, String Id) {
         TenBaiViet = tenBaiViet;
         NoiDung = noiDung;
+        HinhAnh = hinhAnh;
+        this.Id = Id;
     }
 
     public void setTenBaiViet(String tenBaiViet) {
@@ -16,7 +19,7 @@ public class BaiViet {
     }
 
     public void setNoiDung(String noiDung) {
-        NoiDung = noiDung;
+        this.NoiDung = noiDung;
     }
 
     public String getTenBaiViet() {
@@ -25,5 +28,13 @@ public class BaiViet {
 
     public String getNoiDung() {
         return NoiDung;
+    }
+
+    public String getHinhAnh() {
+        return HinhAnh;
+    }
+
+    public String getId() {
+        return Id;
     }
 }

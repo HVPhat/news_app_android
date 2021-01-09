@@ -27,11 +27,11 @@ import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
     LinkedList<BaiViet> lisBaiViet=new LinkedList<BaiViet>();
-    int img = R.drawable.no_image;
+    //int img = R.drawable.no_image;
     RecyclerView recyclerViewWordList;
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     View rootView;
-    public static final String URL="https://10.0.2.2:8000/api/baiviet/";
+    public static final String URL="http://10.0.2.2:8000/api/baiviet/";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
-            return Doc_noi_dung_url("http://10.0.2.2:8000/api/baiviet");
+            return NetworkUtils.GetBaiVietInfo(strings[0]);
         }
 
         @Override
@@ -61,15 +61,20 @@ public class HomeFragment extends Fragment {
                 JSONArray jsonArrayItems=jsonObject.getJSONArray("baiViet");
                 String tieuDe;
                 String noiDung;
+                String hinhAnh;
+                String Id;
                 for(int i=0;i<jsonArrayItems.length();i++){
                     JSONObject jsonObjectItem = jsonArrayItems.getJSONObject(i);
-                        tieuDe=jsonObjectItem.getString("tieu_de");
+                        tieuDe = jsonObjectItem.getString("tieu_de");
                         Log.d("TIEU_DE",jsonObjectItem.getString("tieu_de"));
                         noiDung = jsonObjectItem.getString("noi_dung");
                         Log.d("NOI_DUNG",noiDung);
-                        lisBaiViet.add(new BaiViet(tieuDe,noiDung));
+                        hinhAnh = jsonObjectItem.getString("hinh_anh");
+                        Log.d("HINH_ANH",hinhAnh);
+                        Id = jsonObjectItem.getString("id");
+                        lisBaiViet.add(new BaiViet(tieuDe,noiDung,hinhAnh,Id));
                 }
-                homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(lisBaiViet, img);
+                homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(lisBaiViet);
                 recyclerViewWordList.setAdapter(homeRecyclerViewAdapter);
                 recyclerViewWordList.setLayoutManager(new LinearLayoutManager(getActivity()));
             }catch (Exception e){
@@ -78,7 +83,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public static String Doc_noi_dung_url(String urls) {
+    /*public static String Doc_noi_dung_url(String urls) {
         StringBuilder builder = new StringBuilder();
         String line;
         try {
@@ -100,6 +105,6 @@ public class HomeFragment extends Fragment {
         }
         Log.d("LOG_TAG", builder.toString());
         return builder.toString();
-    }
+    }*/
 
 }

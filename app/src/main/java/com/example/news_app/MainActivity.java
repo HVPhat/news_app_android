@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         selectedFragment = new HomeFragment();
                     break;
-                    case R.id.nav_chu_de
-                            :selectedFragment = new ChuDeFragment();
+                    case R.id.nav_chu_de:
+                            selectedFragment = new ChuDeFragment();
                         break;
                     case R.id.nav_thong_tin_ca_nhan:
                         selectedFragment = new CaNhanFragment();

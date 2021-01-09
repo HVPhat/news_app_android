@@ -4,4 +4,9 @@
     <string name="title_home">Trang chủ</string>
     <string name="title_category">Chủ đề</string>
     <string name="title_profile">Thông tin cá nhân</string>
+    <string name="btnDangNhap">Đăng nhập</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
