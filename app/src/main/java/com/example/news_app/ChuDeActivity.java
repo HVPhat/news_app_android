@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,20 +20,24 @@ import java.net.URLConnection;
 import java.util.LinkedList;
 
 public class ChuDeActivity extends AppCompatActivity {
-    private final LinkedList<BaiViet> listBaiViet=new LinkedList<BaiViet>();
-    private int img = R.drawable.no_image;
+    private final LinkedList<BaiViet> listBaiViet = new LinkedList<BaiViet>();
     private RecyclerView recyclerView;
     public static final String URL="https://10.0.2.2:8000/api/baiviet/";
-    private BaiVietAdapter mAdapter;
+    private HomeRecyclerViewAdapter mAdapter;
+    private String Id_chude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chu_de);
         new KetNoi().execute(URL);
-        recyclerView = findViewById(R.id.RecyclerViewBV);
-        mAdapter = new BaiVietAdapter(listBaiViet, img, this);
-        recyclerView.setAdapter(mAdapter);
+        if (listBaiViet != null) {
+            recyclerView = findViewById(R.id.RecyclerView_BV);
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        Id_chude = bundle.getString("Id_CHUDE");
+        Log.d("KEY", Id_chude);
     }
     class KetNoi extends AsyncTask<String,Void,String> {
 
@@ -50,14 +55,26 @@ public class ChuDeActivity extends AppCompatActivity {
                 JSONArray jsonArrayItems=jsonObject.getJSONArray("baiViet");
                 String tieuDe;
                 String noiDung;
+                String hinhAnh;
+                String Id;
+                String chuDe;
                 for(int i=0;i<jsonArrayItems.length();i++){
                     JSONObject jsonObjectItem = jsonArrayItems.getJSONObject(i);
-                    tieuDe=jsonObjectItem.getString("tieu_de");
+                    tieuDe = jsonObjectItem.getString("tieu_de");
                     Log.d("TIEU_DE",jsonObjectItem.getString("tieu_de"));
                     noiDung = jsonObjectItem.getString("noi_dung");
                     Log.d("NOI_DUNG",noiDung);
-                    listBaiViet.add(new BaiViet(tieuDe,noiDung));
+                    hinhAnh = jsonObjectItem.getString("hinh_anh");
+                    Log.d("HINH_ANH",hinhAnh);
+                    Id = jsonObjectItem.getString("id");
+                    chuDe = jsonObjectItem.getString("chu_de");
+                    Log.d("CHU_DE",chuDe);
+                    if (chuDe.equals(Id_chude)) {
+                        listBaiViet.addLast(new BaiViet(tieuDe, noiDung, hinhAnh, Id));
+                    }
                 }
+                mAdapter = new HomeRecyclerViewAdapter(listBaiViet);
+                recyclerView.setAdapter(mAdapter);
             }catch (Exception e){
                 e.printStackTrace();
             }

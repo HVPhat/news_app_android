@@ -24,7 +24,7 @@ import java.net.URLConnection;
 import java.util.LinkedList;
 
 public class ChuDeFragment extends Fragment {
-    private final LinkedList<String> listChuDe = new LinkedList<>();
+    private final LinkedList<ChuDe> listChuDe = new LinkedList<>();
     private RecyclerView recyclerView;
     private ChuDeRecyclerViewAdapter mAdapter;
     View rootView;
@@ -37,7 +37,6 @@ public class ChuDeFragment extends Fragment {
         if(listChuDe != null){
             //Thiết lập Adapter và LayoutManager cho RecyclerView
             recyclerView = (RecyclerView) rootView.findViewById(R.id.chudeRecyclerView);
-            Log.d("LOG_DEMO","Run...");
         }
         return rootView;
     }
@@ -56,11 +55,13 @@ public class ChuDeFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(s);
                 JSONArray jsonArrayItems=jsonObject.getJSONArray("chuDe");
                 String tenchude;
+                String id;
                 for(int i=0;i<jsonArrayItems.length();i++) {
                     JSONObject jsonObjectItem = jsonArrayItems.getJSONObject(i);
                     tenchude = jsonObjectItem.getString("ten_chu_de");
-                    Log.d("CHU_DE", jsonObjectItem.getString("ten_chu_de"));
-                    listChuDe.add(tenchude);
+                    Log.d("CHU_DE", tenchude);
+                    id = jsonObjectItem.getString("id");
+                    listChuDe.add(new ChuDe(tenchude, id));
                 }
                 mAdapter = new ChuDeRecyclerViewAdapter(listChuDe);
                 recyclerView.setAdapter(mAdapter);
