@@ -14,7 +14,28 @@ import java.net.URLConnection;
 
 public class NetworkUtils {
     public static String GetBaiVietInfo(String Link){
-        HttpURLConnection urlConnection = null;
+        StringBuilder builder = new StringBuilder();
+        String line;
+        try {
+            //create object url
+            java.net.URL url=new URL(Link);
+            //create urlconnection
+            URLConnection urlConnection=url.openConnection();
+            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                builder.append(line + "\n");
+
+            }
+            bufferedReader.close();
+            if (builder.length() == 0) {
+                return null;
+            }
+        } catch (IOException e) {
+            return null;
+        }
+        Log.d("LOG_TAG", builder.toString());
+        return builder.toString();
+        /*HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String bookJSONString = null;
         try {
@@ -53,7 +74,7 @@ public class NetworkUtils {
                 }
         }
 
-        return bookJSONString;
+        return bookJSONString;*/
         /*Log.d("NETWORK",URL);
         StringBuilder builder = new StringBuilder();
         String line;
