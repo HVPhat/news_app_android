@@ -24,19 +24,20 @@ import java.net.URLConnection;
 import java.util.LinkedList;
 
 public class ChuDeFragment extends Fragment {
-    LinkedList<String> listChuDe =new LinkedList<>();
-    RecyclerView recyclerViewWordList;
-    ChuDeRecyclerViewAdapter ChuDeRecyclerViewAdapter;
+    private final LinkedList<String> listChuDe = new LinkedList<>();
+    private RecyclerView recyclerView;
+    private ChuDeRecyclerViewAdapter mAdapter;
     View rootView;
     public static final String URL="https://10.0.2.2:8000/api/chude/";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_chu_de, container, false);
-        new ChuDeFragment.KetNoi().execute(URL);
-        if(listChuDe!=null){
+        new KetNoi().execute(URL);
+        if(listChuDe != null){
             //Thiết lập Adapter và LayoutManager cho RecyclerView
-            recyclerViewWordList = (RecyclerView) rootView.findViewById(R.id.chudeRecyclerView);
+            recyclerView = (RecyclerView) rootView.findViewById(R.id.chudeRecyclerView);
+            Log.d("LOG_DEMO","Run...");
         }
         return rootView;
     }
@@ -59,11 +60,11 @@ public class ChuDeFragment extends Fragment {
                     JSONObject jsonObjectItem = jsonArrayItems.getJSONObject(i);
                     tenchude = jsonObjectItem.getString("ten_chu_de");
                     Log.d("CHU_DE", jsonObjectItem.getString("ten_chu_de"));
-                    listChuDe.addLast(tenchude);
+                    listChuDe.add(tenchude);
                 }
-                ChuDeRecyclerViewAdapter = new ChuDeRecyclerViewAdapter(listChuDe);
-                recyclerViewWordList.setAdapter(ChuDeRecyclerViewAdapter);
-                recyclerViewWordList.setLayoutManager(new LinearLayoutManager(getActivity()));
+                mAdapter = new ChuDeRecyclerViewAdapter(listChuDe);
+                recyclerView.setAdapter(mAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }catch (Exception e){
                 e.printStackTrace();
             }
