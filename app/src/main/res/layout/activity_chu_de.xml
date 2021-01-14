@@ -9,9 +9,49 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView_BV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/pngtree_ackground_i6"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_search"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txt_tencd"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/pngtree_stock_market_data_k_line_background_image_321110"
+        android:paddingTop="5sp"
+        android:text="TIN TỨC THEO CHỦ ĐỀ"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txt_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:hint="Search..."
+        android:inputType="textPersonName"
+        android:paddingStart="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_search"
+        app:layout_constraintStart_toStartOf="@+id/txt_tencd"
+        app:layout_constraintTop_toBottomOf="@+id/txt_tencd" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:onClick="Search"
+        app:layout_constraintEnd_toEndOf="@+id/txt_tencd"
+        app:layout_constraintTop_toBottomOf="@+id/txt_tencd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

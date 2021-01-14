@@ -8,10 +8,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="149dp"
-        android:layout_height="157dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -20,10 +21,12 @@
         android:id="@+id/textViewTieuDe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Bài viết"
-        android:textSize="20dp"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView" />

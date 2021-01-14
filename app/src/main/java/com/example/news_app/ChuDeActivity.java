@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,10 +29,15 @@ public class ChuDeActivity extends AppCompatActivity {
     public static final String URL="https://10.0.2.2:8000/api/baiviet/";
     private HomeRecyclerViewAdapter mAdapter;
     private String Id_chude;
+    EditText txtInput;
+    Button btnSearch;
+    String input = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chu_de);
+        txtInput = findViewById(R.id.txt_search);
+        btnSearch =findViewById(R.id.btn_search);
         new KetNoi().execute(URL);
         if (listBaiViet != null) {
             recyclerView = findViewById(R.id.RecyclerView_BV);
@@ -39,6 +48,17 @@ public class ChuDeActivity extends AppCompatActivity {
         Id_chude = bundle.getString("Id_CHUDE");
         Log.d("KEY", Id_chude);
     }
+
+    public void Search(View view) {
+        listBaiViet.clear();
+        input = txtInput.getText().toString();
+        new KetNoi().execute(URL);
+        if (listBaiViet == null) {
+            Toast.makeText(this, "Không tìm thấy bài viết!", Toast.LENGTH_SHORT).show();
+            input = "";
+        }
+    }
+
     class KetNoi extends AsyncTask<String,Void,String> {
 
         @Override
@@ -69,8 +89,15 @@ public class ChuDeActivity extends AppCompatActivity {
                     Id = jsonObjectItem.getString("id");
                     chuDe = jsonObjectItem.getString("chu_de");
                     Log.d("CHU_DE",chuDe);
-                    if (chuDe.equals(Id_chude)) {
+                    if(input.equals("")){
+                        if (chuDe.equals(Id_chude)) {
                         listBaiViet.addLast(new BaiViet(tieuDe, noiDung, hinhAnh, Id));
+                    }
+                    }
+                    else {
+                        if (chuDe.equals(Id_chude) && tieuDe.equals(input)) {
+                            listBaiViet.addLast(new BaiViet(tieuDe, noiDung, hinhAnh, Id));
+                        }
                     }
                 }
                 mAdapter = new HomeRecyclerViewAdapter(listBaiViet);
