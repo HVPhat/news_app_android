@@ -78,6 +78,7 @@ public class ChuDeActivity extends AppCompatActivity {
                 String hinhAnh;
                 String Id;
                 String chuDe;
+                String Duyet;
                 for(int i=0;i<jsonArrayItems.length();i++){
                     JSONObject jsonObjectItem = jsonArrayItems.getJSONObject(i);
                     tieuDe = jsonObjectItem.getString("tieu_de");
@@ -89,13 +90,15 @@ public class ChuDeActivity extends AppCompatActivity {
                     Id = jsonObjectItem.getString("id");
                     chuDe = jsonObjectItem.getString("chu_de");
                     Log.d("CHU_DE",chuDe);
+                    Duyet = jsonObjectItem.getString("da_duyet");
+                    Log.d("DA_DUYET", Duyet);
                     if(input.equals("")){
-                        if (chuDe.equals(Id_chude)) {
+                        if (chuDe.equals(Id_chude) && Duyet.equals("1")) {
                         listBaiViet.addLast(new BaiViet(tieuDe, noiDung, hinhAnh, Id));
                     }
                     }
                     else {
-                        if (chuDe.equals(Id_chude) && tieuDe.equals(input)) {
+                        if (chuDe.equals(Id_chude) && tieuDe.equals(input)&& Duyet.equals("1")) {
                             listBaiViet.addLast(new BaiViet(tieuDe, noiDung, hinhAnh, Id));
                         }
                     }
