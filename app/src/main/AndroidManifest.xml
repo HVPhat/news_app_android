@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.News_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChuDeActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".ChuDeActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".BaiVietActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
