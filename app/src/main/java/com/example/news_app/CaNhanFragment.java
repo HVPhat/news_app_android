@@ -55,7 +55,7 @@ public class CaNhanFragment extends Fragment {
     String EMAIL_KEY = "email";
     int gan=0;
     public static final String URL="https://10.0.2.2:8000/api/user/";
-    public static final String URL1="https://10.0.2.2:8000/api/user/";
+
 
     @Nullable
     @Override
